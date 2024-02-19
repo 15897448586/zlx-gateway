@@ -13,14 +13,14 @@ public class ZlxGatewayApplication {
         SpringApplication.run(ZlxGatewayApplication.class, args);
     }
 
-    @Bean
-    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-        return builder.routes()
-                .route("tobaidu", r -> r.path("/baidu")
-                        .uri("https://www.baidu.com"))
-//                .route("toyupiicu", r -> r.path("/bilibili")
-//                        .uri("https://www.bilibili.com/"))
-                .build();
-    }
+//    @Bean
+//    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+//        return builder.routes()
+//                .route("tobaidu", r -> r.path("/baidu")
+//                        .uri("https://www.baidu.com"))
+////                .route("toyupiicu", r -> r.path("/bilibili")
+////                        .uri("https://www.bilibili.com/"))
+//                .build();
+//    }
 
 }

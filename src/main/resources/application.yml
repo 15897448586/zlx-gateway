@@ -4,18 +4,20 @@ spring:
   cloud:
     gateway:
       routes:
-#        - id: after_route
-#          uri: https://www.bilibili.com
-#          predicates:
-#            - After=2017-01-20T17:42:47.789-07:00[America/Denver]
-        - id: path_route
-          uri: https://www.bilibili.com/
+        #        - id: after_route
+        #          uri: https://www.bilibili.com
+        #          predicates:
+        #            - After=2017-01-20T17:42:47.789-07:00[America/Denver]
+        - id: api_route
+          uri: http://localhost:8123
           predicates:
-            - Path=/bilibili/**
-
-logging:
-  level:
-    org:
-      springframework:
-        cloud:
-          gateway: trace
+            - Path=/api/**
+#          filters:
+#            - AddRequestHeader=yupi, zlx
+#            - AddRequestParameter=name, lsy
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        cloud:
+#          gateway: trace
