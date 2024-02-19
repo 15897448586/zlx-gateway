@@ -70,12 +70,19 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
             return handleNoAuth(response);
         }
         //5. 请求的模拟接口是否存在;
+        Mono<Void> filter = chain.filter(exchange);
         //6. 请求转发，请求模拟接口;
+        log.info("响应" + response.getStatusCode());
         //7. 响应日志;
+        if (response.getStatusCode() == HttpStatus.OK) {
+
+        }else {
+            return handleInvokeError(response);
+        }
         //8. 调用成功，接口调用次数+1;
         //9. 调用失败，返回一个规范的错误码
         log.info("custom global filter");
-        return chain.filter(exchange);
+        return filter;
     }
 
     @Override
@@ -85,6 +92,11 @@ public class CustomGlobalFilter implements GlobalFilter, Ordered {
 
     public Mono<Void> handleNoAuth(ServerHttpResponse response){
         response.setStatusCode(HttpStatus.FORBIDDEN);
+        return response.setComplete();
+    }
+
+    public Mono<Void> handleInvokeError(ServerHttpResponse response){
+        response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
         return response.setComplete();
     }
 }
